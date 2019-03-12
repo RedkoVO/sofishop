@@ -17,6 +17,25 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps),
+  withHandlers({
+    addProduct: ({ cartProducts }) => product => {
+      let productAlreadyInCart = false
+
+      cartProducts.forEach(cp => {
+        if (cp.id === product.id) {
+          cp.quantity += product.quantity
+          productAlreadyInCart = true
+        }
+      })
+
+      if (!productAlreadyInCart) {
+        cartProducts.push(product)
+      }
+
+      updateCart(cartProducts)
+      this.openFloatCart()
+    }
+  }),
   lifecycle({
     componentWillReceiveProps(nextProps) {
       const { productToRemove, newProduct } = this.props
