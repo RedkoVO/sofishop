@@ -2,23 +2,21 @@ import compose from 'recompose/compose'
 import { withHandlers, lifecycle, pure } from 'recompose'
 import { connect } from 'react-redux'
 
-import { loadCart, removeProduct } from '../../redux/actions/cart'
 import { updateCart } from '../../redux/actions/total'
-// import CartProduct from './CartProduct'
 
 import Cart from '../../components/Cart'
 
 const mapStateToProps = state => ({
-  cartProducts: state.cart.products
-  // newProduct: state.cart.productToAdd,
-  // productToRemove: state.cart.productToRemove,
-  // cartTotal: state.total.data
+  cartProducts: state.cart.products,
+  newProduct: state.cart.productToAdd,
+  productToRemove: state.cart.productToRemove,
+  cartTotal: state.total.data
 })
 
 export default compose(
   connect(mapStateToProps),
   withHandlers({
-    addProduct: ({ cartProducts }) => product => {
+    addProduct: ({ cartProducts, dispatch }) => product => {
       let productAlreadyInCart = false
 
       cartProducts.forEach(cp => {
@@ -32,19 +30,33 @@ export default compose(
         cartProducts.push(product)
       }
 
-      updateCart(cartProducts)
-      this.openFloatCart()
+      dispatch(updateCart(cartProducts))
+    },
+
+    removeProduct: ({ cartProducts, dispatch }) => product => {
+      const index = cartProducts.findIndex(p => p.id === product.id)
+
+      if (index >= 0) {
+        cartProducts.splice(index, 1)
+        dispatch(updateCart(cartProducts))
+      }
     }
   }),
   lifecycle({
     componentWillReceiveProps(nextProps) {
-      const { productToRemove, newProduct } = this.props
+      const {
+        productToRemove,
+        newProduct,
+        addProduct,
+        removeProduct
+      } = this.props
+
       if (nextProps.newProduct !== newProduct) {
-        this.addProduct(nextProps.newProduct)
+        addProduct(nextProps.newProduct)
       }
 
       if (nextProps.productToRemove !== productToRemove) {
-        this.removeProduct(nextProps.productToRemove)
+        removeProduct(nextProps.productToRemove)
       }
     }
   }),

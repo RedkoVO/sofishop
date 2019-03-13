@@ -14,8 +14,6 @@ const cart = (state = initialState, action) => {
         products: payload
       }
     case ADD_PRODUCT:
-    console.log('!!!!!!!!!!!!!!!', payload)
-
       return {
         ...state,
         productToAdd: Object.assign({}, payload)

@@ -4,19 +4,15 @@ import withStyles from '@material-ui/core/styles/withStyles'
 
 import { formatPrice } from '../../utils/formatPrice'
 
+import CartProduct from './components/CartProduct'
+
 import styles from './styles'
 
 const Cart = ({ classes, cartTotal, cartProducts, removeProduct }) => {
-  // const products = cartProducts.map(p => {
-  //   return <CartProduct product={p} removeProduct={removeProduct} key={p.id} />
-  // })
-  const products = cartProducts.map(p => {
-    return <div />
-  })
 
-  // if (!!this.state.isOpen) {
-  //   classes.push('float-cart--open')
-  // }
+  const products = cartProducts.map(p => {
+    return <CartProduct product={p} removeProduct={removeProduct} key={p.id} />
+  })
 
   return (
     <div className={classes.root}>
@@ -25,13 +21,12 @@ const Cart = ({ classes, cartTotal, cartProducts, removeProduct }) => {
         {/* If cart open, show close (x) button */}
         {true && (
           <div
-            onClick={() => this.closeFloatCart()}
+            // onClick={() => this.closeFloatCart()}
             className="float-cart__close-btn"
           >
             X
           </div>
         )}
-
         {/* If cart is closed, show bag with quantity of product and open cart action */}
         {false && (
           <span
@@ -41,11 +36,12 @@ const Cart = ({ classes, cartTotal, cartProducts, removeProduct }) => {
             <span className="bag__quantity">{cartTotal.productQuantity}</span>
           </span>
         )}
-
         <div className="float-cart__content">
           <div className="float-cart__header">
             <span className="bag">
-              <span className="bag__quantity">{cartTotal && cartTotal.productQuantity}</span>
+              <span className="bag__quantity">
+                {cartTotal && cartTotal.productQuantity}
+              </span>
             </span>
             <span className="header-title">Bag</span>
           </div>
@@ -65,8 +61,8 @@ const Cart = ({ classes, cartTotal, cartProducts, removeProduct }) => {
             <div className="sub-price">
               <p className="sub-price__val">
                 {`${cartTotal ? cartTotal.currencyFormat : ''} ${formatPrice(
-                  0, 0 // cartTotal.totalPrice,
-                  // cartTotal.currencyId
+                  cartTotal.totalPrice,
+                  cartTotal.currencyId
                 )}`}
               </p>
               <small className="sub-price__installment">
