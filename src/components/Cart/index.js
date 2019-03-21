@@ -2,14 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 
-import { formatPrice } from '../../utils/formatPrice'
-
 import CartProduct from './components/CartProduct'
 
 import styles from './styles'
 
 const Cart = ({ classes, cartTotal, cartProducts, removeProduct }) => {
-
   const products = cartProducts.map(p => {
     return <CartProduct product={p} removeProduct={removeProduct} key={p.id} />
   })
@@ -60,25 +57,23 @@ const Cart = ({ classes, cartTotal, cartProducts, removeProduct }) => {
             <div className="sub">SUBTOTAL</div>
             <div className="sub-price">
               <p className="sub-price__val">
-                {`${cartTotal ? cartTotal.currencyFormat : ''} ${formatPrice(
-                  cartTotal.totalPrice,
-                  cartTotal.currencyId
-                )}`}
+                {`${cartTotal ? cartTotal.currencyFormat : ''} ${
+                  cartTotal.totalPrice
+                }`}
               </p>
               <small className="sub-price__installment">
                 {cartTotal && !!cartTotal.installments && (
                   <span>
                     {`OR UP TO ${cartTotal.installments} x ${
                       cartTotal.currencyFormat
-                    } ${formatPrice(
-                      cartTotal.totalPrice / cartTotal.installments,
-                      cartTotal.currencyId
-                    )}`}
+                    } ${cartTotal.totalPrice}`}
                   </span>
                 )}
               </small>
             </div>
-            <div onClick={() => this.proceedToCheckout()} className="buy-btn">
+            <div
+              /* onClick={() => this.proceedToCheckout()} */ className="buy-btn"
+            >
               Checkout
             </div>
           </div>

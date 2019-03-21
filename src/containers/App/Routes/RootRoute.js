@@ -1,6 +1,8 @@
 import React from 'react'
 import { compose, pure } from 'recompose'
-import { Route, Redirect, Switch, withRouter } from 'react-router-dom'
+import { Redirect, Switch, withRouter } from 'react-router-dom'
+
+import RoutePage from '../../../components/App/components/Routes/RoutePage'
 
 import Main from '../../Main'
 
@@ -9,7 +11,7 @@ const RootRoute = props => {
 
   return (
     <Switch location={location}>
-      <Route path={'/'} history={history} component={Main} />
+      <RoutePage path={'/'} history={history} component={Main} />
       <Redirect to="/" />
     </Switch>
   )
