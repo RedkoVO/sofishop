@@ -4,7 +4,6 @@ import compose from 'recompose/compose'
 import { withState, withHandlers, pure } from 'recompose'
 import withStyles from '@material-ui/core/styles/withStyles'
 
-import ShortImg from '../../../../assets/images/shop/short-img.jpg'
 import HoverImg from '../../../../assets/images/shop/big-img.jpeg'
 
 import styles from './styles'
@@ -29,12 +28,12 @@ const Product = ({
         {isPictereHover ? (
           <img src={HoverImg} alt="" />
         ) : (
-          <img src={ShortImg} alt="" />
+          <img src={product.image} alt="" />
         )}
       </div>
       <p className={classes.title}>{product.title}</p>
       <div className={classes.price}>
-        {product.price} <small>{product.currencyFormat}</small>
+        {product.price} <small>грн</small>
       </div>
       <button className={classes.addToCart} onClick={() => addProduct(product)}>
         Добавить в корзину

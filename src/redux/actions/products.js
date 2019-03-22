@@ -9,7 +9,7 @@ export const fetchProducts = () => dispatch =>
       Accept: 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    url: `https://react-shopping-cart-67954.firebaseio.com/products.json`
+    url: `http://52.42.248.133/api/products`
   })
     .then(res => {
       dispatch(createFetchProductsSuccess(res.data))
@@ -24,7 +24,7 @@ export const createFetchProductsSuccess = data => {
   return {
     type: FETCH_PRODUCTS,
     payload: {
-      products: data.products,
+      products: data.models,
       success: data.success
     }
   }

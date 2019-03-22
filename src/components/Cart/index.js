@@ -1,56 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import cn from 'classnames'
 import withStyles from '@material-ui/core/styles/withStyles'
 
 import CartProduct from './components/CartProduct'
 
 import styles from './styles'
 
-const Cart = ({ classes, cartTotal, cartProducts, removeProduct }) => {
-  const products = cartProducts.map(p => {
-    return <CartProduct product={p} removeProduct={removeProduct} key={p.id} />
-  })
-
-  return (
+const Cart = ({
+  classes,
+  isShowCart,
+  cartTotal,
+  cartProducts,
+  removeProduct,
+  handleCloseCart
+}) => (
+  <div className={cn(classes.wrCart, { disabled: !isShowCart })}>
+    <div className={classes.overlay} onClick={() => handleCloseCart()} />
     <div className={classes.root}>
-      <div>
-        ------------------------------------------------------------
-        {/* If cart open, show close (x) button */}
-        {true && (
-          <div
-            // onClick={() => this.closeFloatCart()}
-            className="float-cart__close-btn"
-          >
-            X
-          </div>
-        )}
-        {/* If cart is closed, show bag with quantity of product and open cart action */}
-        {false && (
-          <span
-            onClick={() => this.openFloatCart()}
-            className="bag bag--float-cart-closed"
-          >
-            <span className="bag__quantity">{cartTotal.productQuantity}</span>
-          </span>
-        )}
-        <div className="float-cart__content">
-          <div className="float-cart__header">
-            <span className="bag">
-              <span className="bag__quantity">
-                {cartTotal && cartTotal.productQuantity}
-              </span>
-            </span>
-            <span className="header-title">Bag</span>
-          </div>
+      <div className={classes.cart}>
+        <div onClick={() => handleCloseCart()} className={classes.close}>
+          X
+        </div>
+        <div className={classes.title}>Ваш заказ:</div>
 
+        <div className={classes.cartProducts}>
           <div className="float-cart__shelf-container">
-            {products}
-            {!products.length && (
-              <p className="shelf-empty">
-                Add some products in the bag <br />
-                :)
-              </p>
-            )}
+            {cartProducts.map(p => (
+              <CartProduct
+                product={p}
+                removeProduct={removeProduct}
+                key={p.id}
+              />
+            ))}
           </div>
 
           <div className="float-cart__footer">
@@ -71,20 +53,17 @@ const Cart = ({ classes, cartTotal, cartProducts, removeProduct }) => {
                 )}
               </small>
             </div>
-            <div
-              /* onClick={() => this.proceedToCheckout()} */ className="buy-btn"
-            >
-              Checkout
-            </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  </div>
+)
 
 Cart.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  isShowCart: PropTypes.bool,
+  handleCloseCart: PropTypes.func
 }
 
 export default withStyles(styles)(Cart)

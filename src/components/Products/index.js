@@ -14,9 +14,19 @@ const Products = ({ classes, products, handleAddProduct }) => (
       причастностью к совершенству
     </div>
     <div className={classes.wrProducts}>
-      {products.map(item => (
-        <Product product={item} addProduct={handleAddProduct} key={item.id} />
-      ))}
+      {products &&
+        products.map(item => (
+          <Product product={item} addProduct={handleAddProduct} key={item.id} />
+        ))}
+    </div>
+
+    <div className={classes.wrDelivery}>
+      <div className={classes.title}>О доставке</div>
+      <div className={classes.delivery}>
+        О доставке Доставляем оплаченный заказ курьером в течение двух рабочих
+        дней. Чтобы заказать срочную доставку или альтернативные способы
+        доставки, напишите свои пожелания в комментариях во время заказа.
+      </div>
     </div>
   </div>
 )

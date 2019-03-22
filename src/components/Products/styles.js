@@ -13,5 +13,23 @@ export default () => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around'
+  },
+  wrDelivery: {
+    padding: '90px 0',
+    width: '584px',
+    margin: '0 auto',
+    lineHeight: '36px'
+  },
+  title: {
+    paddingBottom: '50px',
+    textAlign: 'center',
+    fontWeight: 900,
+    fontSize: '42px'
+  },
+  delivery: {
+    color: '#000',
+    textAlign: 'center',
+    fontSize: '20px',
+    fontWeight: 100
   }
 })
