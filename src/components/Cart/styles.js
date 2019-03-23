@@ -12,7 +12,8 @@ export default () => ({
     right: 0,
     width: '100%',
     height: '100%',
-    overflow: 'auto'
+    overflow: 'auto',
+    zIndex: 9
   },
   cart: {
     position: 'relative',
@@ -40,11 +41,18 @@ export default () => ({
     cursor: 'pointer'
   },
   title: {
+    paddingBottom: '30px',
     fontSize: '24px',
     fontWeight: 600
   },
   cartProducts: {
     borderTop: '1px solid rgba(0,0,0,.2)',
     borderBottom: '1px solid rgba(0,0,0,.2)'
+  },
+  total: {
+    paddingTop: '20px',
+    textAlign: 'right',
+    fontSize: '16px',
+    fontWeight: 600
   }
 })

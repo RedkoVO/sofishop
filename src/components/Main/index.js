@@ -9,7 +9,13 @@ import CartIcon from '../../assets/images/icon-cart.png'
 
 import styles from './styles'
 
-const Main = ({ classes, isShowCart, handleShowCart, handleCloseCart }) => (
+const Main = ({
+  classes,
+  isShowCart,
+  handleShowCart,
+  handleCloseCart,
+  cartTotal
+}) => (
   <div className={classes.root}>
     <main>
       <Products />
@@ -19,6 +25,7 @@ const Main = ({ classes, isShowCart, handleShowCart, handleCloseCart }) => (
 
     <div className={classes.cartPreview} onClick={() => handleShowCart()}>
       <img src={CartIcon} alt="" />
+      <div className={classes.counter}>{cartTotal.productQuantity}</div>
     </div>
   </div>
 )
@@ -26,6 +33,7 @@ const Main = ({ classes, isShowCart, handleShowCart, handleCloseCart }) => (
 Main.propTypes = {
   classes: PropTypes.object,
   isShowCart: PropTypes.bool,
+  cartTotal: PropTypes.object,
   handleShowCart: PropTypes.func,
   handleCloseCart: PropTypes.func
 }

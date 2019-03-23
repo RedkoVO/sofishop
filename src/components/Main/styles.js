@@ -20,6 +20,19 @@ export default () => ({
       height: '40px'
     }
   },
+  counter: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '30px',
+    height: '30px',
+    backgroundColor: 'red',
+    color: '#fff',
+    borderRadius: '100%',
+    position: 'absolute',
+    right: '-3px',
+    bottom: '-3px'
+  },
   cartImage: {
     width: '40px',
     height: '40px',
