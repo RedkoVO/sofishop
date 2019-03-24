@@ -13,10 +13,6 @@ const validate = values => {
     errors.phone = 'error.required'
   }
 
-  if (!values.comment) {
-    errors.comment = 'error.required'
-  }
-
   return errors
 }
 

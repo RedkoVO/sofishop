@@ -17,6 +17,7 @@ const Cart = ({
   handleCloseCart,
   increaseProduct,
   decreaseProduct,
+  isSuccessCheckout,
   onSubmit
 }) => (
   <div className={cn(classes.wrCart, { disabled: !isShowCart })}>
@@ -28,23 +29,31 @@ const Cart = ({
         </div>
         <div className={classes.title}>Ваш заказ:</div>
 
-        <div className={classes.cartProducts}>
-          {cartProducts.map(p => (
-            <CartProduct
-              product={p}
-              increaseProduct={increaseProduct}
-              decreaseProduct={decreaseProduct}
-              removeProduct={removeProduct}
-              key={p.id}
-            />
-          ))}
-        </div>
+        {isSuccessCheckout ? (
+          <div className={classes.successCheckout}>
+            Спасибо! Данные успешно отправлены.
+          </div>
+        ) : (
+          <React.Fragment>
+            <div className={classes.cartProducts}>
+              {cartProducts.map(p => (
+                <CartProduct
+                  product={p}
+                  increaseProduct={increaseProduct}
+                  decreaseProduct={decreaseProduct}
+                  removeProduct={removeProduct}
+                  key={p.id}
+                />
+              ))}
+            </div>
 
-        <div className={classes.total}>
-          Сумма: {`${cartTotal.totalPrice} ${cartTotal ? 'грн' : ''}`}
-        </div>
+            <div className={classes.total}>
+              Сумма: {`${cartTotal.totalPrice} ${cartTotal ? 'грн' : ''}`}
+            </div>
 
-        <CartForm onSubmit={onSubmit} />
+            <CartForm onSubmit={onSubmit} />
+          </React.Fragment>
+        )}
       </div>
     </div>
   </div>
@@ -53,6 +62,7 @@ const Cart = ({
 Cart.propTypes = {
   classes: PropTypes.object,
   isShowCart: PropTypes.bool,
+  isSuccessCheckout: PropTypes.bool,
   cartTotal: PropTypes.object,
   cartProducts: PropTypes.array,
   removeProduct: PropTypes.func,

@@ -1,10 +1,10 @@
 import compose from 'recompose/compose'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
-import { withHandlers, lifecycle, pure } from 'recompose'
+import { reduxForm, reset } from 'redux-form'
+import { withState, withHandlers, lifecycle, pure } from 'recompose'
 
 import { updateCart } from '../../redux/actions/total'
-import { checkoutAdd } from '../../redux/actions/cart'
+import { checkoutAdd, removeAllProducts } from '../../redux/actions/cart'
 
 import validate from './validate'
 
@@ -23,8 +23,10 @@ export default compose(
   connect(mapStateToProps),
   reduxForm({
     form: FORM_NAME,
-    validate
+    validate,
+    pure: false
   }),
+  withState('isSuccessCheckout', 'setSuccessCheckout', false),
   withHandlers({
     addProduct: ({ cartProducts, dispatch }) => product => {
       let productAlreadyInCart = false
@@ -90,26 +92,31 @@ export default compose(
       })
     },
 
-    removeProduct: ({ cartProducts, dispatch }) => product => {
+    removeProduct: ({ cartProducts, dispatch, handleCloseCart }) => product => {
       const index = cartProducts.findIndex(p => p.id === product.id)
       if (index >= 0) {
         cartProducts.splice(index, 1)
         dispatch(updateCart(cartProducts))
       }
+
+      if (cartProducts.length === 0) {
+        handleCloseCart()
+      }
     },
 
-    onSubmit: ({ handleSubmit, cartProducts, dispatch }) =>
+    onSubmit: ({ handleSubmit, cartProducts, dispatch, setSuccessCheckout }) =>
       handleSubmit(variables => {
         const data = {
           products: cartProducts,
           ...variables
         }
-        // console.log('data', data)
 
         dispatch(checkoutAdd(data))
           .then(res => {
-            if (res.success) {
-              // dispatch(updateCart([]))
+            if (!res.success) {
+              dispatch(removeAllProducts())
+              dispatch(reset(FORM_NAME))
+              setSuccessCheckout(true)
             }
           })
           .catch(err => {
@@ -123,8 +130,16 @@ export default compose(
         productToRemove,
         newProduct,
         addProduct,
-        removeProduct
+        removeProduct,
+        isShowCart,
+        setSuccessCheckout
       } = this.props
+
+      if (nextProps.isShowCart !== isShowCart) {
+        if (!nextProps.isShowCart) {
+          setSuccessCheckout(false)
+        }
+      }
 
       if (nextProps.newProduct !== newProduct) {
         addProduct(nextProps.newProduct)

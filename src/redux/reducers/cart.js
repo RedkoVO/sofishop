@@ -1,4 +1,9 @@
-import { LOAD_CART, ADD_PRODUCT, REMOVE_PRODUCT } from '../actions/types'
+import {
+  LOAD_CART,
+  ADD_PRODUCT,
+  REMOVE_PRODUCT,
+  REMOVE_ALL_PRODUCTS
+} from '../actions/types'
 
 const initialState = {
   products: []
@@ -23,6 +28,15 @@ const cart = (state = initialState, action) => {
         ...state,
         productToRemove: Object.assign({}, payload)
       }
+
+    case REMOVE_ALL_PRODUCTS:
+      localStorage.removeItem('state')
+
+      return {
+        ...state,
+        products: []
+      }
+
     default:
       return state
   }

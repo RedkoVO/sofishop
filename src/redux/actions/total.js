@@ -17,9 +17,9 @@ export const updateCart = cartProducts => dispatch => {
   }, 0)
 
   let cartTotal = {
-    productQuantity,
+    productQuantity: !isNaN(productQuantity) ? productQuantity : 0,
     installments,
-    totalPrice,
+    totalPrice: !isNaN(totalPrice) ? totalPrice : 0,
     currencyId: 'USD',
     currencyFormat: '$'
   }

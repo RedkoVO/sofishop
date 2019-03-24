@@ -23,10 +23,12 @@ const Main = ({
 
     <Cart handleCloseCart={handleCloseCart} isShowCart={isShowCart} />
 
-    <div className={classes.cartPreview} onClick={() => handleShowCart()}>
-      <img src={CartIcon} alt="" />
-      <div className={classes.counter}>{cartTotal.productQuantity}</div>
-    </div>
+    {cartTotal.productQuantity > 0 && (
+      <div className={classes.cartPreview} onClick={() => handleShowCart()}>
+        <img src={CartIcon} alt="" />
+        <div className={classes.counter}>{cartTotal.productQuantity}</div>
+      </div>
+    )}
   </div>
 )
 

@@ -1,7 +1,13 @@
 import axios from 'axios'
 import qs from 'qs'
 
-import { LOAD_CART, ADD_PRODUCT, REMOVE_PRODUCT, CHECKOUT_ADD } from './types'
+import {
+  LOAD_CART,
+  ADD_PRODUCT,
+  REMOVE_PRODUCT,
+  CHECKOUT_ADD,
+  REMOVE_ALL_PRODUCTS
+} from './types'
 
 export const loadCart = products => ({
   type: LOAD_CART,
@@ -16,6 +22,10 @@ export const addProduct = product => ({
 export const removeProduct = product => ({
   type: REMOVE_PRODUCT,
   payload: product
+})
+
+export const removeAllProducts = () => ({
+  type: REMOVE_ALL_PRODUCTS
 })
 
 /* CHECKOUT ADD */

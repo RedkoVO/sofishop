@@ -54,5 +54,14 @@ export default () => ({
     textAlign: 'right',
     fontSize: '16px',
     fontWeight: 600
+  },
+  successCheckout: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '170px',
+    background: '#62C584',
+    color: '#fff',
+    fontSize: '20px'
   }
 })
