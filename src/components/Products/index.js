@@ -6,7 +6,12 @@ import Product from './components/Product'
 
 import styles from './styles'
 
-const Products = ({ classes, products, handleAddProduct }) => (
+const Products = ({
+  classes,
+  products,
+  handleAddProduct,
+  handleShowPreview
+}) => (
   <div className={classes.root}>
     <div className={classes.description}>
       Наши деревянные головоломки — это игры, сочетающие талант мастера и чистый
@@ -16,7 +21,12 @@ const Products = ({ classes, products, handleAddProduct }) => (
     <div className={classes.wrProducts}>
       {products &&
         products.map(item => (
-          <Product product={item} addProduct={handleAddProduct} key={item.id} />
+          <Product
+            product={item}
+            addProduct={handleAddProduct}
+            handleShowPreview={handleShowPreview}
+            key={item.id}
+          />
         ))}
     </div>
 
@@ -34,7 +44,8 @@ const Products = ({ classes, products, handleAddProduct }) => (
 Products.propTypes = {
   classes: PropTypes.object,
   products: PropTypes.array,
-  handleAddProduct: PropTypes.func.isRequired
+  handleAddProduct: PropTypes.func,
+  handleShowPreview: PropTypes.func
 }
 
 export default withStyles(styles)(Products)

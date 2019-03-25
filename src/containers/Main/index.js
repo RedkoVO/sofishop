@@ -11,16 +11,23 @@ const mapStateToProps = state => ({
 export default compose(
   connect(mapStateToProps),
   withState('isShowCart', 'setShowCart', false),
+  withState('choosedProduct', 'setChoosedProduct', {}),
   withHandlers({
     handleShowCart: ({ setShowCart }) => () => {
       setShowCart(true)
       document.body.style.overflow = 'hidden'
       window.scrollTo(0, 0)
     },
-
     handleCloseCart: ({ setShowCart }) => () => {
       setShowCart(false)
       document.body.style.overflow = 'auto'
+    },
+
+    handleShowPreview: ({ setChoosedProduct }) => product => {
+      setChoosedProduct(product)
+    },
+    handleClosePreview: ({ setChoosedProduct }) => () => {
+      setChoosedProduct({})
     }
   }),
   pure

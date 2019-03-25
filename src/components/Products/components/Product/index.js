@@ -4,8 +4,6 @@ import compose from 'recompose/compose'
 import { withState, withHandlers, pure } from 'recompose'
 import withStyles from '@material-ui/core/styles/withStyles'
 
-import HoverImg from '../../../../assets/images/shop/big-img.jpeg'
-
 import styles from './styles'
 
 const Product = ({
@@ -14,7 +12,8 @@ const Product = ({
   addProduct,
   isPictereHover,
   hoverOn,
-  hoverOff
+  hoverOff,
+  handleShowPreview
 }) => {
   product.quantity = 1
 
@@ -26,16 +25,22 @@ const Product = ({
         onMouseLeave={() => hoverOff()}
       >
         {isPictereHover ? (
-          <img src={HoverImg} alt="" />
+          <React.Fragment>
+            <img
+              src={product.images[1] ? product.images[1] : product.images[0]}
+              alt=""
+            />
+          </React.Fragment>
         ) : (
-          <img src={product.image} alt="" />
+          <img src={product.images[0]} alt="" />
         )}
       </div>
       <p className={classes.title}>{product.title}</p>
       <div className={classes.price}>
         {product.price} <small>грн</small>
       </div>
-      <button className={classes.addToCart} onClick={() => addProduct(product)}>
+      {/* <button className={classes.addToCart} onClick={() => addProduct(product)}> */}
+      <button className={classes.addToCart} onClick={() => handleShowPreview(product)}>
         Добавить в корзину
       </button>
       <button className={classes.learnMore}>Узнать больше</button>
@@ -48,7 +53,8 @@ Product.propTypes = {
   isPictereHover: PropTypes.bool,
   addProduct: PropTypes.func.isRequired,
   hoverOn: PropTypes.func.isRequired,
-  hoverOff: PropTypes.func.isRequired
+  hoverOff: PropTypes.func.isRequired,
+  handleShowPreview: PropTypes.func
 }
 
 export default compose(

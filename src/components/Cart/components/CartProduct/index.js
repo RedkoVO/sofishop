@@ -18,7 +18,7 @@ const CartProduct = ({
   return (
     <div className={classes.root}>
       <div className={classes.picture}>
-        <img src={product.image} alt="" />
+        <img src={product.images[0]} alt="" />
       </div>
 
       <div className={classes.title}>{product.title}</div>

@@ -113,7 +113,7 @@ export default compose(
 
         dispatch(checkoutAdd(data))
           .then(res => {
-            if (!res.success) {
+            if (res.success) {
               dispatch(removeAllProducts())
               dispatch(reset(FORM_NAME))
               setSuccessCheckout(true)
