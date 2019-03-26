@@ -1,6 +1,12 @@
 import compose from 'recompose/compose'
-import { pure } from 'recompose'
+import { withState, withHandlers, pure } from 'recompose'
 
 import Header from '../../components/Header'
 
-export default compose(pure)(Header)
+export default compose(
+  withState('isShowAuth', 'setShowAuth', false),
+  withHandlers(
+    
+  ),
+  pure
+)(Header)

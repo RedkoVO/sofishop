@@ -1,5 +1,8 @@
 export default () => ({
-  root: {},
+  root: {
+    display: 'flex',
+    alignItems: 'center'
+  },
   menu: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -17,5 +20,13 @@ export default () => ({
   menuItem: {
     color: '#000',
     textDecoration: 'none'
+  },
+  auth: {
+    padding: '4px 20px',
+    marginRight: '20px',
+    color: '#fff',
+    background: '#4099ff',
+    borderRadius: '10px',
+    cursor: 'pointer'
   }
 })

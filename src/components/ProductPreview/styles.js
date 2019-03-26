@@ -74,5 +74,8 @@ export default () => ({
     marginTop: '20px',
     fontSize: '14px',
     lineHeight: '24px'
+  },
+  priviewSlider: {
+    
   }
 })
