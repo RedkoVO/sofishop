@@ -28,5 +28,20 @@ export default () => ({
     background: '#4099ff',
     borderRadius: '10px',
     cursor: 'pointer'
+  },
+  user: {
+    display: 'flex',
+    right: '16px',
+    position: 'absolute',
+    color: '#9c9c9c'
+  },
+  logout: {
+    marginLeft: '10px',
+    padding: '4px 20px',
+    color: '#fff',
+    fontSize: '10px',
+    background: '#4099ff',
+    borderRadius: '10px',
+    cursor: 'pointer'
   }
 })

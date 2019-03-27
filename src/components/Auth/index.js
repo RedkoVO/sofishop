@@ -1,17 +1,51 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Field, Form } from 'redux-form'
+import cn from 'classnames'
 import withStyles from '@material-ui/core/styles/withStyles'
+
+import InputField from '../App/components/InputField'
 
 import styles from './styles'
 
-const AuthModal = ({ classes }) => (
+const AuthModal = ({ classes, onSubmit, handleCloseAuth }) => (
   <div className={classes.root}>
-    AUTH
+    <div className={classes.overlay} onClick={() => handleCloseAuth()} />
+    <Form className={classes.form} onSubmit={onSubmit}>
+      <div className={classes.title}>Авторизация</div>
+      <Field
+        id="emailLogin"
+        name="email"
+        type="text"
+        className={classes.field}
+        component={InputField}
+        placeholder="Email"
+      />
+      <Field
+        id="passLogin"
+        name="password"
+        type="password"
+        className={classes.field}
+        component={InputField}
+        placeholder="Пароль"
+      />
+
+      <button
+        type="submit"
+        className={cn(classes.submit, {
+          disabled: false
+        })}
+      >
+        Авторизироваться
+      </button>
+    </Form>
   </div>
 )
 
 AuthModal.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  onSubmit: PropTypes.func,
+  handleCloseAuth: PropTypes.func
 }
 
 export default withStyles(styles)(AuthModal)

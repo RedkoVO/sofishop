@@ -1,6 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
 
+import gC from '../../constants'
+
 import {
   LOAD_CART,
   ADD_PRODUCT,
@@ -37,7 +39,7 @@ export const checkoutAdd = data => dispatch =>
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     data: qs.stringify(data),
-    url: `${'http://52.42.248.133/'}/api/checkout/add`
+    url: `${gC.API_URL}/api/checkout/add`
   })
     .then(response => {
       dispatch(createCheckoutAddSuccess(response.data))

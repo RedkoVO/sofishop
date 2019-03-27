@@ -7,7 +7,14 @@ import AuthModal from '../../containers/Auth'
 
 import styles from './styles'
 
-const Header = ({ classes }) => (
+const Header = ({
+  classes,
+  isShowAuth,
+  handleShowAuth,
+  handleCloseAuth,
+  handleLogout,
+  checkAuthUser
+}) => (
   <React.Fragment>
     <div className={classes.root}>
       <ul className={classes.menu}>
@@ -62,15 +69,31 @@ const Header = ({ classes }) => (
           </NavLink>
         </li>
       </ul>
-      <div className={classes.auth}>Авторизация</div>
+      {checkAuthUser && checkAuthUser.email ? (
+        <div className={classes.user}>
+          {checkAuthUser.email}{' '}
+          <div className={classes.logout} onClick={() => handleLogout()}>
+            Выйти
+          </div>
+        </div>
+      ) : (
+        <div className={classes.auth} onClick={() => handleShowAuth()}>
+          Авторизация
+        </div>
+      )}
     </div>
 
-    <AuthModal />
+    {isShowAuth && <AuthModal handleCloseAuth={handleCloseAuth} />}
   </React.Fragment>
 )
 
 Header.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  isShowAuth: PropTypes.bool,
+  checkAuthUser: PropTypes.object,
+  handleShowAuth: PropTypes.func,
+  handleCloseAuth: PropTypes.func,
+  handleLogout: PropTypes.func
 }
 
 export default withStyles(styles)(Header)
