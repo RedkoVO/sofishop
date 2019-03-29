@@ -18,16 +18,22 @@ export default compose(
     validate
   }),
   withHandlers({
-    onSubmit: ({ dispatch, handleSubmit }) =>
+    onSubmit: ({ dispatch, handleSubmit, handleCloseAuth }) =>
       handleSubmit(variables => {
-        console.log('variables', variables)
-
         dispatch(loginUser(variables))
           .then(res => {
             if (res.success && res.token) {
               localStorage.setItem('token', res.token)
 
               dispatch(checkAuth())
+                .then(res => {
+                  if (res.success) {
+                    handleCloseAuth()
+                  }
+                })
+                .catch(err => {
+                  console.log('Error check:', err)
+                })
             }
           })
           .catch(err => {

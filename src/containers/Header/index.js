@@ -1,10 +1,10 @@
 import compose from 'recompose/compose'
 import { connect } from 'react-redux'
-import { withState, withHandlers, pure } from 'recompose'
+import { withState, withHandlers, pure, lifecycle } from 'recompose'
 
 import Header from '../../components/Header'
 
-import { logout } from '../../redux/actions/auth'
+import { logout, checkAuth } from '../../redux/actions/auth'
 
 const mapStateToProps = state => {
   return {
@@ -27,12 +27,19 @@ export default compose(
       dispatch(logout())
         .then(res => {
           if (res && res.success) {
-            // dispatch(checkAuth())
+            dispatch(checkAuth())
           }
         })
         .catch(err => {
           console.log('Error logout:', err)
         })
+    }
+  }),
+  lifecycle({
+    componentDidMount() {
+      const { dispatch } = this.props
+
+      dispatch(checkAuth())
     }
   }),
   pure
