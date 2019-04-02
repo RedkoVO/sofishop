@@ -1,3 +1,3 @@
 export default {
-  API_URL: 'http://52.42.248.133'
+  API_URL: 'http://shop.com'
 }

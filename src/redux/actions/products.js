@@ -1,6 +1,8 @@
 import { FETCH_PRODUCTS } from './types'
 import axios from 'axios'
 
+import gC from '../../constants'
+
 /* FETCH PRODUCTS */
 export const fetchProducts = () => dispatch =>
   axios({
@@ -9,7 +11,7 @@ export const fetchProducts = () => dispatch =>
       Accept: 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    url: `http://52.42.248.133/api/products`
+    url: `${gC.API_URL}/api/products`
   })
     .then(res => {
       dispatch(createFetchProductsSuccess(res.data))
