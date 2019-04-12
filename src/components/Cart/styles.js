@@ -1,4 +1,4 @@
-export default () => ({
+export default theme => ({
   wrCart: {
     '&.disabled': {
       display: 'none'
@@ -18,12 +18,15 @@ export default () => ({
   cart: {
     position: 'relative',
     width: '500px',
-    // height: '1300px',
     height: 'fit-content',
     margin: '65px auto',
     padding: '40px',
     backgroundColor: '#fff',
-    zIndex: 9
+    zIndex: 9,
+
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    }
   },
   overlay: {
     position: 'fixed',

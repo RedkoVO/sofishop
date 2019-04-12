@@ -1,4 +1,4 @@
-export default () => ({
+export default theme => ({
   root: {},
   cartPreview: {
     position: 'fixed',
@@ -15,9 +15,20 @@ export default () => ({
     cursor: 'pointer',
     boxShadow: '0 0 10px 0 rgba(0,0,0,.2)',
 
+    [theme.breakpoints.down('sm')]: {
+      right: '25px',
+      width: '55px',
+      height: '55px'
+    },
+
     '& img': {
       width: '40px',
-      height: '40px'
+      height: '40px',
+
+      [theme.breakpoints.down('sm')]: {
+        width: '30px',
+        height: '30px'
+      }
     }
   },
   counter: {
@@ -31,7 +42,15 @@ export default () => ({
     borderRadius: '100%',
     position: 'absolute',
     right: '-3px',
-    bottom: '-3px'
+    bottom: '-3px',
+
+    [theme.breakpoints.down('sm')]: {
+      width: '22px',
+      height: '22px',
+      right: '-5px',
+      bottom: '-5px',
+      fontSize: '12px'
+    }
   },
   cartImage: {
     width: '40px',

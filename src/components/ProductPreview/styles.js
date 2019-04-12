@@ -1,4 +1,4 @@
-export default () => ({
+export default theme => ({
   root: {
     position: 'fixed',
     top: 0,
@@ -6,17 +6,29 @@ export default () => ({
     left: 0,
     right: 0,
     margin: 'auto',
-    background: '#fff'
+    background: '#fff',
+
+    [theme.breakpoints.down('sm')]: {
+      overflow: 'auto'
+    }
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '65px'
+    height: '65px',
+
+    [theme.breakpoints.down('sm')]: {
+      justifyContent: 'flex-end'
+    }
   },
   return: {
     marginLeft: '15px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
   },
   close: {
     width: '30px',
@@ -26,11 +38,23 @@ export default () => ({
   content: {
     display: 'flex',
     justifyContent: 'space-around',
-    paddingTop: '40px'
+    paddingTop: '40px',
+
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column'
+    }
   },
   img: {
     width: '560px',
     height: '560px',
+
+    [theme.breakpoints.down('md')]: {
+      margin: '0 auto'
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      height: '400px'
+    },
 
     '& img': {
       width: '100%',
@@ -39,7 +63,15 @@ export default () => ({
     }
   },
   wrDescription: {
-    width: '560px'
+    width: '560px',
+
+    [theme.breakpoints.down('md')]: {
+      padding: '0 20px'
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      margin: '0 auto'
+    }
   },
   title: {
     paddingBottom: '18px',
@@ -68,14 +100,15 @@ export default () => ({
     },
     '&:focus': {
       outline: 'none'
+    },
+
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
     }
   },
   description: {
     marginTop: '20px',
     fontSize: '14px',
     lineHeight: '24px'
-  },
-  priviewSlider: {
-    
   }
 })

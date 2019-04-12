@@ -1,4 +1,4 @@
-export default () => ({
+export default theme => ({
   root: {
     display: 'flex',
     alignItems: 'center'
@@ -11,10 +11,20 @@ export default () => ({
     padding: '20px 0',
     listStyle: 'none',
 
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column',
+      textAlign: 'center',
+      paddingTop: '60px'
+    },
+
     '& li': {
       textTransform: 'uppercase',
       fontSize: '13px',
-      fontWeight: 900
+      fontWeight: 900,
+
+      [theme.breakpoints.down('md')]: {
+        paddingBottom: '20px'
+      }
     }
   },
   menuItem: {
@@ -27,13 +37,29 @@ export default () => ({
     color: '#fff',
     background: '#4099ff',
     borderRadius: '10px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+
+    [theme.breakpoints.down('md')]: {
+      position: 'absolute',
+      top: '20px',
+      left: 0,
+      right: 0,
+      width: '128px',
+      margin: 'auto'
+    }
   },
   user: {
     display: 'flex',
     right: '16px',
     position: 'absolute',
-    color: '#9c9c9c'
+    color: '#9c9c9c',
+
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+      justifyContent: 'center',
+      top: '20px',
+      right: 0
+    }
   },
   logout: {
     marginLeft: '10px',

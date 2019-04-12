@@ -1,12 +1,20 @@
-export default () => ({
+export default theme => ({
   root: {
     marginBottom: '90px',
-    width: '360px'
+    width: '360px',
+
+    [theme.breakpoints.down('md')]: {
+      width: '280px'
+    }
   },
   picture: {
     width: '100%',
     height: '330px',
     cursor: 'pointer',
+
+    [theme.breakpoints.down('md')]: {
+      height: '280px'
+    },
 
     '& img': {
       width: '100%',
@@ -40,6 +48,10 @@ export default () => ({
 
     '&:focus': {
       outline: 'none'
+    },
+
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
     }
   },
   learnMore: {
@@ -55,6 +67,10 @@ export default () => ({
 
     '&:focus': {
       outline: 'none'
+    },
+
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
     }
   }
 })
