@@ -47,12 +47,11 @@ const ProductPreview = ({
         <div className={classes.img}>
           {product.images[1] ? (
             <Slider {...settings}>
-              <div>
-                <img src={product.images[0]} alt="" />
-              </div>
-              <div>
-                <img src={product.images[1]} alt="" />
-              </div>
+              {product.images.map((item, index) => (
+                <div key={index}>
+                  <img src={item} alt="" />
+                </div>
+              ))}
             </Slider>
           ) : (
             <img src={product.images[0]} alt="" />
