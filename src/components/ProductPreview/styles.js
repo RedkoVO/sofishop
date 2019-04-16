@@ -7,10 +7,7 @@ export default theme => ({
     right: 0,
     margin: 'auto',
     background: '#fff',
-
-    [theme.breakpoints.down('sm')]: {
-      overflow: 'auto'
-    }
+    overflow: 'auto'
   },
   header: {
     display: 'flex',

@@ -9,7 +9,6 @@ import styles from './styles'
 const Product = ({
   classes,
   product,
-  addProduct,
   isPictereHover,
   hoverOn,
   hoverOff,
@@ -27,6 +26,7 @@ const Product = ({
         {isPictereHover ? (
           <React.Fragment>
             <img
+              onClick={() => handleShowPreview(product)}
               src={product.images[1] ? product.images[1] : product.images[0]}
               alt=""
             />
@@ -39,11 +39,18 @@ const Product = ({
       <div className={classes.price}>
         {product.price} <small>грн</small>
       </div>
-      {/* <button className={classes.addToCart} onClick={() => addProduct(product)}> */}
-      <button className={classes.addToCart} onClick={() => handleShowPreview(product)}>
+      <button
+        className={classes.addToCart}
+        onClick={() => handleShowPreview(product)}
+      >
         Добавить в корзину
       </button>
-      <button className={classes.learnMore}>Узнать больше</button>
+      <button
+        className={classes.learnMore}
+        onClick={() => handleShowPreview(product)}
+      >
+        Узнать больше
+      </button>
     </div>
   )
 }
@@ -51,7 +58,6 @@ const Product = ({
 Product.propTypes = {
   product: PropTypes.object.isRequired,
   isPictereHover: PropTypes.bool,
-  addProduct: PropTypes.func.isRequired,
   hoverOn: PropTypes.func.isRequired,
   hoverOff: PropTypes.func.isRequired,
   handleShowPreview: PropTypes.func

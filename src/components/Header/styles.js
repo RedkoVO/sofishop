@@ -1,7 +1,12 @@
 export default theme => ({
   root: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: '70px',
+
+    [theme.breakpoints.down('md')]: {
+      height: 'inherit'
+    }
   },
   menu: {
     display: 'flex',
@@ -69,5 +74,19 @@ export default theme => ({
     background: '#4099ff',
     borderRadius: '10px',
     cursor: 'pointer'
+  },
+  logo: {
+    position: 'absolute',
+    width: '50px',
+    top: '10px',
+    left: '50px',
+
+    [theme.breakpoints.down('sm')]: {
+      left: '10px'
+    },
+
+    '& img': {
+      width: '100%'
+    }
   }
 })

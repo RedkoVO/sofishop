@@ -5,6 +5,8 @@ import withStyles from '@material-ui/core/styles/withStyles'
 
 import AuthModal from '../../containers/Auth'
 
+import LogoIcon from '../../assets/images/logo.jpg'
+
 import styles from './styles'
 
 const Header = ({
@@ -17,6 +19,9 @@ const Header = ({
 }) => (
   <React.Fragment>
     <div className={classes.root}>
+    <div className={classes.logo} >
+      <img src={LogoIcon} alt="" />
+      </div>
       <ul className={classes.menu}>
         <li>
           <NavLink
