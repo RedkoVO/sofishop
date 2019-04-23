@@ -13,6 +13,7 @@ const Cart = ({
   isShowCart,
   cartTotal,
   cartProducts,
+  paymentUrl,
   removeProduct,
   handleCloseCart,
   increaseProduct,
@@ -30,9 +31,7 @@ const Cart = ({
         <div className={classes.title}>Ваш заказ:</div>
 
         {isSuccessCheckout ? (
-          <div className={classes.successCheckout}>
-            Спасибо! Данные успешно отправлены.
-          </div>
+            <iframe title="payment" src={paymentUrl.paymentUrl} className={classes.paymentIframe} />
         ) : (
           <React.Fragment>
             <div className={classes.cartProducts}>
@@ -65,6 +64,7 @@ Cart.propTypes = {
   isSuccessCheckout: PropTypes.bool,
   cartTotal: PropTypes.object,
   cartProducts: PropTypes.array,
+  paymentUrl: PropTypes.object,
   removeProduct: PropTypes.func,
   handleCloseCart: PropTypes.func,
   increaseProduct: PropTypes.func,

@@ -14,7 +14,8 @@ const mapStateToProps = state => ({
   cartProducts: state.cart.products,
   newProduct: state.cart.productToAdd,
   productToRemove: state.cart.productToRemove,
-  cartTotal: state.total.data
+  cartTotal: state.total.data,
+  paymentUrl: state.cart.checkoutAdd,
 })
 
 const FORM_NAME = 'Cart'

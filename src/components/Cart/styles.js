@@ -17,7 +17,8 @@ export default theme => ({
   },
   cart: {
     position: 'relative',
-    width: '500px',
+    // width: '500px',
+    width: 'fit-content',
     height: 'fit-content',
     margin: '65px auto',
     padding: '40px',
@@ -58,13 +59,8 @@ export default theme => ({
     fontSize: '16px',
     fontWeight: 600
   },
-  successCheckout: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '170px',
-    background: '#62C584',
-    color: '#fff',
-    fontSize: '20px'
+  paymentIframe: {
+    width: '500px',
+    height: '500px'
   }
 })

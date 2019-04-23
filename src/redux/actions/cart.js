@@ -54,6 +54,7 @@ export const createCheckoutAddSuccess = data => {
   return {
     type: CHECKOUT_ADD,
     payload: {
+      paymentUrl: data.payment_url,
       success: data.success
     }
   }

@@ -2,7 +2,8 @@ import {
   LOAD_CART,
   ADD_PRODUCT,
   REMOVE_PRODUCT,
-  REMOVE_ALL_PRODUCTS
+  REMOVE_ALL_PRODUCTS,
+  CHECKOUT_ADD
 } from '../actions/types'
 
 const initialState = {
@@ -35,6 +36,15 @@ const cart = (state = initialState, action) => {
       return {
         ...state,
         products: []
+      }
+
+    case CHECKOUT_ADD:
+      return {
+        ...state,
+        checkoutAdd: {
+          paymentUrl: payload.paymentUrl,
+          success: payload.success
+        }
       }
 
     default:
