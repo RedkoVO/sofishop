@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { NavLink } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 import withStyles from '@material-ui/core/styles/withStyles'
 
 import AuthModal from '../../containers/Auth'
@@ -19,59 +19,47 @@ const Header = ({
 }) => (
   <React.Fragment>
     <div className={classes.root}>
-    <div className={classes.logo} >
-      <img src={LogoIcon} alt="" />
+      <div className={classes.logo}>
+        <img src={LogoIcon} alt="" />
       </div>
       <ul className={classes.menu}>
         <li>
-          <NavLink
-            to="#"
+          {/* <NavLink
+            to="https://sophiaiq.com/?utm_referrer=#rec96385388"
             exact
             activeClassName="active"
             className={classes.menuItem}
           >
-            Здоровье
-          </NavLink>
+            Анализ личности
+          </NavLink> */}
+          <a
+            href="https://sophiaiq.com/?utm_referrer=#rec96385388"
+            className={classes.menuItem}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Анализ личности
+          </a>
         </li>
         <li>
-          <NavLink
-            to="#"
-            exact
-            activeClassName="active"
+          <a
+            href="https://immo.sophiaiq.com/"
             className={classes.menuItem}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Развлечение
-          </NavLink>
+            Молодость
+          </a>
         </li>
         <li>
-          <NavLink
-            to="#"
-            exact
-            activeClassName="active"
+          <a
+            href="https://future.sophiaiq.com/"
             className={classes.menuItem}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Красота
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="#"
-            exact
-            activeClassName="active"
-            className={classes.menuItem}
-          >
-            Спорт
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="#"
-            exact
-            activeClassName="active"
-            className={classes.menuItem}
-          >
-            Lifestyle
-          </NavLink>
+            Бизнес
+          </a>
         </li>
       </ul>
       {checkAuthUser && checkAuthUser.email ? (

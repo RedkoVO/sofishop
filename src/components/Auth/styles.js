@@ -56,5 +56,9 @@ export default () => ({
     '&:focus': {
       outline: 'none'
     }
+  },
+  error: {
+    color: 'red',
+    textAlign: 'center'
   }
 })

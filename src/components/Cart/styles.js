@@ -17,7 +17,6 @@ export default theme => ({
   },
   cart: {
     position: 'relative',
-    // width: '500px',
     width: 'fit-content',
     height: 'fit-content',
     margin: '65px auto',
@@ -26,6 +25,14 @@ export default theme => ({
     zIndex: 9,
 
     [theme.breakpoints.down('sm')]: {
+      width: '100%',
+
+      '&.iframe': {
+        padding: 0
+      }
+    },
+
+    '&.iframe': {
       width: '100%'
     }
   },
@@ -60,7 +67,8 @@ export default theme => ({
     fontWeight: 600
   },
   paymentIframe: {
-    width: '500px',
-    height: '500px'
+    width: '100%',
+    height: '500px',
+    border: 'none'
   }
 })

@@ -63,7 +63,7 @@ export default compose(
       dispatch(updateCart(cartProducts))
     },
 
-    decreaseProduct: ({ cartProducts, dispatch }) => product => {
+    decreaseProduct: ({ cartProducts, dispatch, handleCloseCart }) => product => {
       let productAlreadyInCart = false
       const removeProduct = () => {
         const index = cartProducts.findIndex(p => p.id === product.id)
@@ -84,6 +84,8 @@ export default compose(
         if (cp.id === product.id) {
           if (cp.quantity === 1) {
             removeProduct()
+            handleCloseCart()
+            console.log('0000', cp.quantity)
           } else {
             cp.quantity -= 1
             productAlreadyInCart = true

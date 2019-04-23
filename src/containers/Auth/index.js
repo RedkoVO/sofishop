@@ -1,6 +1,6 @@
 import compose from 'recompose/compose'
 import { connect } from 'react-redux'
-import { withHandlers, pure } from 'recompose'
+import { withHandlers, pure, withState } from 'recompose'
 import { reduxForm } from 'redux-form'
 
 import Auth from '../../components/Auth'
@@ -17,8 +17,9 @@ export default compose(
     form: FORM_NAME,
     validate
   }),
+  withState('isError', 'setError', false),
   withHandlers({
-    onSubmit: ({ dispatch, handleSubmit, handleCloseAuth }) =>
+    onSubmit: ({ dispatch, handleSubmit, handleCloseAuth, setError }) =>
       handleSubmit(variables => {
         dispatch(loginUser(variables))
           .then(res => {
@@ -34,6 +35,10 @@ export default compose(
                 .catch(err => {
                   console.log('Error check:', err)
                 })
+            }
+
+            if (!res.success) {
+              setError(true)
             }
           })
           .catch(err => {

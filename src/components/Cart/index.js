@@ -24,16 +24,20 @@ const Cart = ({
   <div className={cn(classes.wrCart, { disabled: !isShowCart })}>
     <div className={classes.overlay} onClick={() => handleCloseCart()} />
     <div className={classes.root}>
-      <div className={classes.cart}>
+      <div className={cn(classes.cart, { iframe: isSuccessCheckout })}>
         <div onClick={() => handleCloseCart()} className={classes.close}>
           X
         </div>
-        <div className={classes.title}>Ваш заказ:</div>
 
         {isSuccessCheckout ? (
-            <iframe title="payment" src={paymentUrl.paymentUrl} className={classes.paymentIframe} />
+          <iframe
+            title="payment"
+            src={paymentUrl.paymentUrl}
+            className={classes.paymentIframe}
+          />
         ) : (
           <React.Fragment>
+            <div className={classes.title}>Ваш заказ:</div>
             <div className={classes.cartProducts}>
               {cartProducts.map(p => (
                 <CartProduct
