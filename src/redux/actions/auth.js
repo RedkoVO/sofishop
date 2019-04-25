@@ -58,11 +58,6 @@ export const loginUser = data => () =>
 
 /* REGISTRATION USER */
 export const registrationUser = data => async () => {
-  const dataBody = {
-    email: data.emailRegister,
-    password: data.passwordRegister
-  }
-
   try {
     const response = await axios({
       method: 'post',
@@ -70,7 +65,7 @@ export const registrationUser = data => async () => {
         Accept: 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      data: qs.stringify(dataBody),
+      data: qs.stringify(data),
       url: `${gC.API_URL}/api/auth/register`
     })
     return response.data

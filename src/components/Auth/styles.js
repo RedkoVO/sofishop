@@ -60,5 +60,21 @@ export default () => ({
   error: {
     color: 'red',
     textAlign: 'center'
+  },
+  succesRegistration: {
+    position: 'fixed',
+    display: 'flex',
+    flexDirection: 'column',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    margin: 'auto',
+    padding: '30px',
+    width: '500px',
+    height: 'fit-content',
+    backgroundColor: '#fff',
+    borderRadius: '10px',
+    zIndex: 9
   }
 })

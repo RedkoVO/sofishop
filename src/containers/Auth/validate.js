@@ -17,16 +17,6 @@ const validate = values => {
     errors.password = 'error.required'
   }
 
-  if (!values.passwordRegister) {
-    errors.passwordRegister = 'error.required'
-  }
-
-  if (!values.confirmpassword) {
-    errors.confirmpassword = 'error.required'
-  } else if (values.confirmpassword !== values.passwordRegister) {
-    errors.confirmpassword = 'error.confirmpassword'
-  }
-
   return errors
 }
 

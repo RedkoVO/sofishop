@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import ReCAPTCHA from 'react-google-recaptcha'
 import { Field, Form } from 'redux-form'
 import cn from 'classnames'
 import withStyles from '@material-ui/core/styles/withStyles'
@@ -12,7 +13,9 @@ const Registration = ({
   classes,
   onSubmit,
   isErrorRegister,
-  handleChangeAuthType
+  recaptchaError,
+  handleChangeAuthType,
+  handleChangeRecaptcha
 }) => (
   <Form className={classes.root} onSubmit={onSubmit}>
     <div className={classes.title}>Регистрация</div>
@@ -24,26 +27,17 @@ const Registration = ({
       component={InputField}
       placeholder="Email"
     />
-    <Field
-      id="passwordRegister"
-      name="passwordRegister"
-      type="password"
-      className={classes.field}
-      component={InputField}
-      placeholder="Пароль"
-    />
-    <Field
-      id="confirmpassword"
-      name="confirmpassword"
-      type="password"
-      className={classes.field}
-      component={InputField}
-      placeholder="Повторите пароль"
+
+    <ReCAPTCHA
+      className={classes.recaptcha}
+      sitekey="6LcwOJEUAAAAAEkWn7eDLwZ2V81nrrWDLHwk1_AE"
+      onChange={handleChangeRecaptcha}
     />
 
     {isErrorRegister && (
       <div className={classes.error}>Такой пользователь уже существует.</div>
     )}
+    {recaptchaError && <div className={classes.error}>{recaptchaError}</div>}
 
     <button
       type="submit"
@@ -67,7 +61,9 @@ Registration.propTypes = {
   classes: PropTypes.object,
   onSubmit: PropTypes.func,
   isErrorRegister: PropTypes.bool,
-  handleChangeAuthType: PropTypes.func
+  recaptchaError: PropTypes.string,
+  handleChangeAuthType: PropTypes.func,
+  handleChangeRecaptcha: PropTypes.func
 }
 
 export default withStyles(styles)(Registration)

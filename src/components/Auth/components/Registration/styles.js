@@ -60,5 +60,8 @@ export default () => ({
     margin: '0 auto',
     marginTop: '10px',
     cursor: 'pointer'
+  },
+  recaptcha: {
+    paddingTop: '15px'
   }
 })

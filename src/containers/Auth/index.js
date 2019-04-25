@@ -24,9 +24,17 @@ export default compose(
   withState('isError', 'setError', false),
   withState('isErrorRegister', 'setErrorRegister', false),
   withState('isLogin', 'setIsLogin', true),
+  withState('recaptcha', 'setRecaptcha', ''),
+  withState('recaptchaError', 'setRecaptchaError', ''),
+  withState('isShowSuccessRegistration', 'setShowSuccessRegistration', false),
   withHandlers({
     handleChangeAuthType: ({ isLogin, setIsLogin }) => () => {
       setIsLogin(!isLogin)
+    },
+
+    handleChangeRecaptcha: ({ setRecaptcha, setRecaptchaError }) => hash => {
+      setRecaptcha(hash)
+      setRecaptchaError('')
     },
 
     onSubmitLogin: ({ dispatch, handleSubmit, handleCloseAuth, setError }) =>
@@ -59,33 +67,49 @@ export default compose(
     onSubmitRegistration: ({
       dispatch,
       handleSubmit,
-      handleCloseAuth,
-      setErrorRegister
+      // handleCloseAuth,
+      setShowSuccessRegistration,
+      setErrorRegister,
+      setRecaptchaError,
+      recaptcha
     }) =>
       handleSubmit(variables => {
-        dispatch(registrationUser(variables))
-          .then(res => {
-            if (res.success && res.token) {
-              localStorage.setItem('token', res.token)
+        if (recaptcha) {
+          const data = {
+            email: variables.emailRegister,
+            recaptcha
+          }
 
-              dispatch(checkAuth())
-                .then(res => {
-                  if (res.success) {
-                    handleCloseAuth()
-                  }
-                })
-                .catch(err => {
-                  console.log('Error check:', err)
-                })
-            }
+          dispatch(registrationUser(data))
+            .then(res => {
+              // if (res.success && res.token) {
+              //   localStorage.setItem('token', res.token)
 
-            if (!res.success) {
-              setErrorRegister(true)
-            }
-          })
-          .catch(err => {
-            console.log('Error Login:', err)
-          })
+              //   dispatch(checkAuth())
+              //     .then(res => {
+              //       if (res.success) {
+              //         handleCloseAuth()
+              //       }
+              //     })
+              //     .catch(err => {
+              //       console.log('Error check:', err)
+              //     })
+              // }
+
+              if (res.success) {
+                setShowSuccessRegistration(true)
+              }
+
+              if (!res.success) {
+                setErrorRegister(true)
+              }
+            })
+            .catch(err => {
+              console.log('Error Login:', err)
+            })
+        } else {
+          setRecaptchaError('Заполните капчу')
+        }
       })
   }),
   pure

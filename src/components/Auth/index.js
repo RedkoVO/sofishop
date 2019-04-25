@@ -13,25 +13,38 @@ const AuthModal = ({
   onSubmitRegistration,
   handleCloseAuth,
   handleChangeAuthType,
+  handleChangeRecaptcha,
   isLogin,
   isError,
-  isErrorRegister
+  isErrorRegister,
+  recaptchaError,
+  isShowSuccessRegistration
 }) => (
   <div className={classes.root}>
     <div className={classes.overlay} onClick={() => handleCloseAuth()} />
 
-    {isLogin ? (
-      <Login
-        onSubmit={onSubmitLogin}
-        isError={isError}
-        handleChangeAuthType={handleChangeAuthType}
-      />
+    {isShowSuccessRegistration ? (
+      <div className={classes.succesRegistration}>
+        Вам на почту отправлен email.
+      </div>
     ) : (
-      <Registration
-        onSubmit={onSubmitRegistration}
-        isErrorRegister={isErrorRegister}
-        handleChangeAuthType={handleChangeAuthType}
-      />
+      <React.Fragment>
+        {isLogin ? (
+          <Login
+            onSubmit={onSubmitLogin}
+            isError={isError}
+            handleChangeAuthType={handleChangeAuthType}
+          />
+        ) : (
+          <Registration
+            onSubmit={onSubmitRegistration}
+            recaptchaError={recaptchaError}
+            isErrorRegister={isErrorRegister}
+            handleChangeAuthType={handleChangeAuthType}
+            handleChangeRecaptcha={handleChangeRecaptcha}
+          />
+        )}
+      </React.Fragment>
     )}
   </div>
 )
@@ -41,9 +54,12 @@ AuthModal.propTypes = {
   onSubmitLogin: PropTypes.func,
   isError: PropTypes.bool,
   isErrorRegister: PropTypes.bool,
+  isShowSuccessRegistration: PropTypes.bool,
+  recaptchaError: PropTypes.string,
   isLogin: PropTypes.bool,
   handleCloseAuth: PropTypes.func,
-  handleChangeAuthType: PropTypes.func
+  handleChangeAuthType: PropTypes.func,
+  handleChangeRecaptcha: PropTypes.func
 }
 
 export default withStyles(styles)(AuthModal)
