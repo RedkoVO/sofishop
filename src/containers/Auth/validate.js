@@ -7,8 +7,24 @@ const validate = values => {
     errors.email = 'error.email'
   }
 
-  if (!values.pass) {
-    errors.pass = 'error.required'
+  if (!values.emailRegister) {
+    errors.emailRegister = 'error.required'
+  } else if (!/.+@.+\..+/i.test(values.emailRegister)) {
+    errors.emailRegister = 'error.emailRegister'
+  }
+
+  if (!values.password) {
+    errors.password = 'error.required'
+  }
+
+  if (!values.passwordRegister) {
+    errors.passwordRegister = 'error.required'
+  }
+
+  if (!values.confirmpassword) {
+    errors.confirmpassword = 'error.required'
+  } else if (values.confirmpassword !== values.passwordRegister) {
+    errors.confirmpassword = 'error.confirmpassword'
   }
 
   return errors

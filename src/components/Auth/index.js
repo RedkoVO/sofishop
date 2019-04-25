@@ -1,56 +1,49 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Field, Form } from 'redux-form'
-import cn from 'classnames'
 import withStyles from '@material-ui/core/styles/withStyles'
 
-import InputField from '../App/components/InputField'
+import Login from './components/Login'
+import Registration from './components/Registration'
 
 import styles from './styles'
 
-const AuthModal = ({ classes, onSubmit, handleCloseAuth, isError }) => (
+const AuthModal = ({
+  classes,
+  onSubmitLogin,
+  onSubmitRegistration,
+  handleCloseAuth,
+  handleChangeAuthType,
+  isLogin,
+  isError,
+  isErrorRegister
+}) => (
   <div className={classes.root}>
     <div className={classes.overlay} onClick={() => handleCloseAuth()} />
-    <Form className={classes.form} onSubmit={onSubmit}>
-      <div className={classes.title}>Авторизация</div>
-      <Field
-        id="emailLogin"
-        name="email"
-        type="text"
-        className={classes.field}
-        component={InputField}
-        placeholder="Email"
-      />
-      <Field
-        id="passLogin"
-        name="password"
-        type="password"
-        className={classes.field}
-        component={InputField}
-        placeholder="Пароль"
-      />
 
-      {isError && (
-        <div className={classes.error}>Email или пароль неверный.</div>
-      )}
-
-      <button
-        type="submit"
-        className={cn(classes.submit, {
-          disabled: false
-        })}
-      >
-        Авторизироваться
-      </button>
-    </Form>
+    {isLogin ? (
+      <Login
+        onSubmit={onSubmitLogin}
+        isError={isError}
+        handleChangeAuthType={handleChangeAuthType}
+      />
+    ) : (
+      <Registration
+        onSubmit={onSubmitRegistration}
+        isErrorRegister={isErrorRegister}
+        handleChangeAuthType={handleChangeAuthType}
+      />
+    )}
   </div>
 )
 
 AuthModal.propTypes = {
   classes: PropTypes.object,
-  onSubmit: PropTypes.func,
+  onSubmitLogin: PropTypes.func,
   isError: PropTypes.bool,
-  handleCloseAuth: PropTypes.func
+  isErrorRegister: PropTypes.bool,
+  isLogin: PropTypes.bool,
+  handleCloseAuth: PropTypes.func,
+  handleChangeAuthType: PropTypes.func
 }
 
 export default withStyles(styles)(AuthModal)

@@ -62,6 +62,7 @@ const Header = ({
           </a>
         </li>
       </ul>
+
       {checkAuthUser && checkAuthUser.email ? (
         <div className={classes.user}>
           {checkAuthUser.email}{' '}

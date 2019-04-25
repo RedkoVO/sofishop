@@ -5,7 +5,11 @@ import { reduxForm } from 'redux-form'
 
 import Auth from '../../components/Auth'
 
-import { loginUser, checkAuth } from '../../redux/actions/auth'
+import {
+  loginUser,
+  registrationUser,
+  checkAuth
+} from '../../redux/actions/auth'
 
 import validate from './validate'
 
@@ -18,8 +22,14 @@ export default compose(
     validate
   }),
   withState('isError', 'setError', false),
+  withState('isErrorRegister', 'setErrorRegister', false),
+  withState('isLogin', 'setIsLogin', true),
   withHandlers({
-    onSubmit: ({ dispatch, handleSubmit, handleCloseAuth, setError }) =>
+    handleChangeAuthType: ({ isLogin, setIsLogin }) => () => {
+      setIsLogin(!isLogin)
+    },
+
+    onSubmitLogin: ({ dispatch, handleSubmit, handleCloseAuth, setError }) =>
       handleSubmit(variables => {
         dispatch(loginUser(variables))
           .then(res => {
@@ -39,6 +49,38 @@ export default compose(
 
             if (!res.success) {
               setError(true)
+            }
+          })
+          .catch(err => {
+            console.log('Error Login:', err)
+          })
+      }),
+
+    onSubmitRegistration: ({
+      dispatch,
+      handleSubmit,
+      handleCloseAuth,
+      setErrorRegister
+    }) =>
+      handleSubmit(variables => {
+        dispatch(registrationUser(variables))
+          .then(res => {
+            if (res.success && res.token) {
+              localStorage.setItem('token', res.token)
+
+              dispatch(checkAuth())
+                .then(res => {
+                  if (res.success) {
+                    handleCloseAuth()
+                  }
+                })
+                .catch(err => {
+                  console.log('Error check:', err)
+                })
+            }
+
+            if (!res.success) {
+              setErrorRegister(true)
             }
           })
           .catch(err => {

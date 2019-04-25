@@ -1,31 +1,29 @@
 import axios from 'axios'
 import qs from 'qs'
 
-import { CHECK_AUTH, LOGIN_USER, LOGOUT } from './types'
+import { CHECK_AUTH, LOGOUT } from './types'
 
 import gC from '../../constants'
 
 /* CHECK AUTH */
-export const checkAuth = () => dispatch => {
+export const checkAuth = () => async dispatch => {
   const token = localStorage.getItem('token')
 
-  return axios({
-    method: 'get',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      token: token ? token : ''
-    },
-    url: `${gC.API_URL}/api/auth/check`
-  })
-    .then(response => {
-      dispatch(createCheckAuthSuccess(response.data))
-
-      return response.data
+  try {
+    const response = await axios({
+      method: 'get',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        token: token ? token : ''
+      },
+      url: `${gC.API_URL}/api/auth/check`
     })
-    .catch(error => {
-      console.log('CHECK_AUTH error', error)
-    })
+    dispatch(createCheckAuthSuccess(response.data))
+    return response.data
+  } catch (error) {
+    console.log('CHECK_AUTH error', error)
+  }
 }
 
 export const createCheckAuthSuccess = data => {
@@ -40,7 +38,7 @@ export const createCheckAuthSuccess = data => {
 /* ********** */
 
 /* LOGIN USER */
-export const loginUser = data => dispatch =>
+export const loginUser = data => () =>
   axios({
     method: 'post',
     headers: {
@@ -51,20 +49,33 @@ export const loginUser = data => dispatch =>
     url: `${gC.API_URL}/api/auth/login`
   })
     .then(response => {
-      // dispatch(createLoginUserSuccess(response.data))
-
       return response.data
     })
     .catch(error => {
       console.log('LOGIN_USER error', error)
     })
+/* ********** */
 
-export const createLoginUserSuccess = data => {
-  return {
-    type: LOGIN_USER,
-    payload: {
-      success: data.success
-    }
+/* REGISTRATION USER */
+export const registrationUser = data => async () => {
+  const dataBody = {
+    email: data.emailRegister,
+    password: data.passwordRegister
+  }
+
+  try {
+    const response = await axios({
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: qs.stringify(dataBody),
+      url: `${gC.API_URL}/api/auth/register`
+    })
+    return response.data
+  } catch (error) {
+    console.log('REGISTRATION_USER error', error)
   }
 }
 /* ********** */
