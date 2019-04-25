@@ -72,5 +72,10 @@ export default theme => ({
     [theme.breakpoints.down('sm')]: {
       width: '100%'
     }
+  },
+  oldPrice: {
+    paddingLeft: '10px',
+    color: '#bdbdbd',
+    textDecoration: 'line-through'
   }
 })

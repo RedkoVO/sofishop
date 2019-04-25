@@ -9,13 +9,14 @@ import styles from './styles'
 const Product = ({
   classes,
   product,
+  currency,
   isPictereHover,
   hoverOn,
   hoverOff,
   handleShowPreview
 }) => {
   product.quantity = 1
-
+  
   return (
     <div className={classes.root}>
       <div
@@ -37,7 +38,14 @@ const Product = ({
       </div>
       <p className={classes.title}>{product.title}</p>
       <div className={classes.price}>
-        {product.price} <small>$</small>
+        <small>{currency}</small> {product.price}
+        {Number(product.old_price) ? (
+          <span className={classes.oldPrice}>
+            <small>{currency}</small> {product.old_price}
+          </span>
+        ) : (
+          false
+        )}
       </div>
       <button
         className={classes.addToCart}
@@ -57,6 +65,7 @@ const Product = ({
 
 Product.propTypes = {
   product: PropTypes.object.isRequired,
+  currency: PropTypes.string,
   isPictereHover: PropTypes.bool,
   hoverOn: PropTypes.func.isRequired,
   hoverOff: PropTypes.func.isRequired,

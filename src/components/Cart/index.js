@@ -11,6 +11,7 @@ import styles from './styles'
 const Cart = ({
   classes,
   isShowCart,
+  currency,
   cartTotal,
   cartProducts,
   paymentUrl,
@@ -42,6 +43,7 @@ const Cart = ({
               {cartProducts.map(p => (
                 <CartProduct
                   product={p}
+                  currency={currency}
                   increaseProduct={increaseProduct}
                   decreaseProduct={decreaseProduct}
                   removeProduct={removeProduct}
@@ -51,7 +53,7 @@ const Cart = ({
             </div>
 
             <div className={classes.total}>
-              Сумма: {`${cartTotal.totalPrice} ${cartTotal ? '$' : ''}`}
+              Сумма: {`${cartTotal ? currency : ''} ${cartTotal.totalPrice}`}
             </div>
 
             <CartForm onSubmit={onSubmit} />
@@ -65,6 +67,7 @@ const Cart = ({
 Cart.propTypes = {
   classes: PropTypes.object,
   isShowCart: PropTypes.bool,
+  currency: PropTypes.string,
   isSuccessCheckout: PropTypes.bool,
   cartTotal: PropTypes.object,
   cartProducts: PropTypes.array,

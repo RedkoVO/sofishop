@@ -16,6 +16,7 @@ const mapStateToProps = state => ({
   productToRemove: state.cart.productToRemove,
   cartTotal: state.total.data,
   paymentUrl: state.cart.checkoutAdd,
+  currency: state.products.currency
 })
 
 const FORM_NAME = 'Cart'
@@ -63,7 +64,11 @@ export default compose(
       dispatch(updateCart(cartProducts))
     },
 
-    decreaseProduct: ({ cartProducts, dispatch, handleCloseCart }) => product => {
+    decreaseProduct: ({
+      cartProducts,
+      dispatch,
+      handleCloseCart
+    }) => product => {
       let productAlreadyInCart = false
       const removeProduct = () => {
         const index = cartProducts.findIndex(p => p.id === product.id)

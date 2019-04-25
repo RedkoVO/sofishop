@@ -9,6 +9,7 @@ import styles from './styles'
 const Products = ({
   classes,
   products,
+  currency,
   handleAddProduct,
   handleShowPreview
 }) => (
@@ -30,6 +31,7 @@ const Products = ({
         products.map(item => (
           <Product
             product={item}
+            currency={currency}
             addProduct={handleAddProduct}
             handleShowPreview={handleShowPreview}
             key={item.id}

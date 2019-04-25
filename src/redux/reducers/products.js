@@ -12,6 +12,7 @@ const products = (state = initialState, action) => {
 
       return {
         ...state,
+        currency: payload.currency,
         products: payload.products
       }
     default:

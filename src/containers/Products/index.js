@@ -51,7 +51,8 @@ import { addProduct } from '../../redux/actions/cart'
 // ]
 
 const mapStateToProps = state => ({
-  products: state.products.products
+  products: state.products.products,
+  currency: state.products.currency
 })
 
 export default compose(

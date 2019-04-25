@@ -11,6 +11,7 @@ import styles from './styles'
 const CartProduct = ({
   classes,
   product,
+  currency,
   increaseProduct,
   decreaseProduct,
   removeProduct
@@ -33,7 +34,9 @@ const CartProduct = ({
           onClick={() => increaseProduct(product)}
         />
       </div>
-      <div className={classes.price}>{product.price} $</div>
+      <div className={classes.price}>
+        {currency} {product.price}
+      </div>
       <RemoveIcon
         className={classes.remove}
         onClick={() => removeProduct(product)}
@@ -45,6 +48,7 @@ const CartProduct = ({
 CartProduct.propTypes = {
   classes: PropTypes.object,
   product: PropTypes.object,
+  currency: PropTypes.string,
   increaseProduct: PropTypes.func,
   decreaseProduct: PropTypes.func,
   removeProduct: PropTypes.func

@@ -26,6 +26,7 @@ export const createFetchProductsSuccess = data => {
   return {
     type: FETCH_PRODUCTS,
     payload: {
+      currency: data.currency,
       products: data.models,
       success: data.success
     }

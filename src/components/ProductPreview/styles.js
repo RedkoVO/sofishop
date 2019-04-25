@@ -107,5 +107,10 @@ export default theme => ({
     marginTop: '20px',
     fontSize: '14px',
     lineHeight: '24px'
+  },
+  oldPrice: {
+    paddingLeft: '10px',
+    color: '#bdbdbd',
+    textDecoration: 'line-through'
   }
 })

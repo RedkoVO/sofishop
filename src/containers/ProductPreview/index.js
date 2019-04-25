@@ -6,8 +6,12 @@ import { addProduct } from '../../redux/actions/cart'
 
 import ProductPreview from '../../components/ProductPreview'
 
+const mapStateToProps = state => ({
+  currency: state.products.currency
+})
+
 export default compose(
-  connect(),
+  connect(mapStateToProps),
   withHandlers({
     handleAddProduct: ({ dispatch, handleClosePreview }) => product => {
       dispatch(addProduct(product))

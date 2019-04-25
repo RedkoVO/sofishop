@@ -11,6 +11,7 @@ import styles from './styles'
 const ProductPreview = ({
   classes,
   product,
+  currency,
   handleClosePreview,
   handleAddProduct
 }) => {
@@ -60,7 +61,16 @@ const ProductPreview = ({
 
         <div className={classes.wrDescription}>
           <div className={classes.title}>{product.title}</div>
-          <div className={classes.price}>{product.price} $</div>
+          <div className={classes.price}>
+            {currency} {product.price}
+            {Number(product.old_price) ? (
+              <span className={classes.oldPrice}>
+                {currency} {product.old_price}
+              </span>
+            ) : (
+              false
+            )}
+          </div>
           <button
             className={classes.button}
             onClick={() => handleAddProduct(product)}
@@ -77,6 +87,7 @@ const ProductPreview = ({
 ProductPreview.propTypes = {
   classes: PropTypes.object,
   product: PropTypes.object,
+  currency: PropTypes.string,
   handleClosePreview: PropTypes.func,
   handleAddProduct: PropTypes.func
 }
