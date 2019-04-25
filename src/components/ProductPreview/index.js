@@ -60,7 +60,7 @@ const ProductPreview = ({
 
         <div className={classes.wrDescription}>
           <div className={classes.title}>{product.title}</div>
-          <div className={classes.price}>{product.price} грн</div>
+          <div className={classes.price}>{product.price} $</div>
           <button
             className={classes.button}
             onClick={() => handleAddProduct(product)}

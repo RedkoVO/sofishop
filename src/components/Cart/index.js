@@ -51,7 +51,7 @@ const Cart = ({
             </div>
 
             <div className={classes.total}>
-              Сумма: {`${cartTotal.totalPrice} ${cartTotal ? 'грн' : ''}`}
+              Сумма: {`${cartTotal.totalPrice} ${cartTotal ? '$' : ''}`}
             </div>
 
             <CartForm onSubmit={onSubmit} />

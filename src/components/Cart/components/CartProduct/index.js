@@ -33,7 +33,7 @@ const CartProduct = ({
           onClick={() => increaseProduct(product)}
         />
       </div>
-      <div className={classes.price}>{product.price} грн</div>
+      <div className={classes.price}>{product.price} $</div>
       <RemoveIcon
         className={classes.remove}
         onClick={() => removeProduct(product)}

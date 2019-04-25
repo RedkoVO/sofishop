@@ -37,7 +37,7 @@ const Product = ({
       </div>
       <p className={classes.title}>{product.title}</p>
       <div className={classes.price}>
-        {product.price} <small>грн</small>
+        {product.price} <small>$</small>
       </div>
       <button
         className={classes.addToCart}

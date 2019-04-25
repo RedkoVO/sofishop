@@ -31,7 +31,7 @@ const AuthModal = ({ classes, onSubmit, handleCloseAuth, isError }) => (
       />
 
       {isError && (
-        <div className={classes.error}>Bad credentials.</div>
+        <div className={classes.error}>Email или пароль неверный.</div>
       )}
 
       <button
