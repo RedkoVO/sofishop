@@ -30,7 +30,7 @@ const Registration = ({
 
     <ReCAPTCHA
       className={classes.recaptcha}
-      sitekey="6LcwOJEUAAAAAEkWn7eDLwZ2V81nrrWDLHwk1_AE"
+      sitekey="6LcLOJEUAAAAAFl5ddbNCgE2TK0fr19LM3XuE9sh"
       onChange={handleChangeRecaptcha}
     />
 

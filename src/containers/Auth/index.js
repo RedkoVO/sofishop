@@ -67,7 +67,7 @@ export default compose(
     onSubmitRegistration: ({
       dispatch,
       handleSubmit,
-      // handleCloseAuth,
+      handleCloseAuth,
       setShowSuccessRegistration,
       setErrorRegister,
       setRecaptchaError,
@@ -82,23 +82,24 @@ export default compose(
 
           dispatch(registrationUser(data))
             .then(res => {
-              // if (res.success && res.token) {
-              //   localStorage.setItem('token', res.token)
+              if (res.success && res.token) {
+                localStorage.setItem('token', res.token)
 
-              //   dispatch(checkAuth())
-              //     .then(res => {
-              //       if (res.success) {
-              //         handleCloseAuth()
-              //       }
-              //     })
-              //     .catch(err => {
-              //       console.log('Error check:', err)
-              //     })
-              // }
-
-              if (res.success) {
-                setShowSuccessRegistration(true)
+                dispatch(checkAuth())
+                  .then(res => {
+                    if (res.success) {
+                      handleCloseAuth()
+                      setShowSuccessRegistration(true)
+                    }
+                  })
+                  .catch(err => {
+                    console.log('Error check:', err)
+                  })
               }
+
+              // if (res.success) {
+              //   setShowSuccessRegistration(true)
+              // }
 
               if (!res.success) {
                 setErrorRegister(true)
